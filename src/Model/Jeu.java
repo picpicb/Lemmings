@@ -24,11 +24,13 @@ public class Jeu extends Observable{
 	
 	public Jeu(Compteur cpt, Grille grille, int niveau){
 		this.cpt = cpt;
+		this.grille = grille;
 		this.addObserver(grille);
 		this.niveau = niveau;
 		listeL = new ArrayList<Lemming>();
 		listeO = new ArrayList<Obstacle>();		
 	}
+	
 	
 	public ArrayList<Obstacle> getObstacle(){
 		return listeO;
@@ -39,17 +41,20 @@ public class Jeu extends Observable{
 	}
 	
 	public void run(){
-		listeO.add(new OTerre(2,6));
-		while(isAlive()){
-			System.out.println("hgh");
-			try {
-				Thread.sleep(200);
-				cpt.incrementer();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
+		chargerNiveau(f);
+		
+		grille.afficher(listeO);
+		
+//		while(isAlive()){
+//			try {
+//				Thread.sleep(200);
+//				notifyObservers();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 	public boolean isAlive(){
@@ -57,6 +62,42 @@ public class Jeu extends Observable{
 			return true;
 		}else{
 			return false;
+		}
+	}
+	
+	public void chargerNiveau(File f){
+		InputStream in = null;
+		try {
+			in = new FileInputStream(f);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	    Reader lecteur = new InputStreamReader(in);
+	    int c;
+	    try {
+	    	for(int i=0; i<30; i++){
+				for(int j=0; j<45; j++){
+					c = lecteur.read(); //lecture du fichier caractere par caractere, ligne par ligne
+					switch (c) {
+					case 10:
+						c = lecteur.read();
+						break;
+					case 49:
+						listeO.add(new OTerre(j,i));
+						break;
+					case 50:
+						
+						break;
+					case 51:
+						
+						break;
+					default:
+						break;
+					}
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 }

@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 import Model.*;
+
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -20,8 +22,30 @@ public class Grille extends JPanel implements Observer{
 		this.setBackground(Color.BLACK);
 	}
 
+	
+	
+	public void afficher(ArrayList<Obstacle> l){
+		System.out.println("kjf");
+		Graphics g=this.getGraphics();
+		for(Obstacle obs : l ){
+			try {
+				File f = new File(obs.getUrl());
+				Image image = ImageIO.read(f);
+				g.drawImage(image, obs.getPosX()*20, obs.getPosY()*20, this);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	
 	@Override
-	public void update(Observable o, Object arg) {
+	public void update(Observable o, Object argO) {
+		System.out.println("notify");
 		Graphics g=this.getGraphics();
 		for(Obstacle obs : ((Jeu)o).getObstacle()){
 			try {
