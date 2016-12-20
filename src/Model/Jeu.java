@@ -50,8 +50,7 @@ public class Jeu extends Observable{
 	
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
-		chargerNiveau(f);
-		
+		chargerNiveau(f);	
 		grille.afficher(listeO);
 		
 //		while(isAlive()){
@@ -94,10 +93,10 @@ public class Jeu extends Observable{
 						listeO.add(new OTerre(j,i));
 						break;
 					case 50:
-						
+						listeO.add(new OLave(j,i));
 						break;
 					case 51:
-						
+						listeO.add(new OMetal(j,i));
 						break;
 					default:
 						break;
