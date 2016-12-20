@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 import Model.Bloc;
 import Model.Jeu;
+import Model.Lemming;
 
 public abstract class State {
 	
-	private Jeu jeu;
+	protected Jeu jeu;
 	
 	public State(Jeu j){
 		jeu=j;
 	}
 	
-	public abstract void step(int x, int y);
+	public abstract void step(Lemming lem);
 }

@@ -24,50 +24,44 @@ public class Grille extends JPanel implements Observer{
 
 	
 	
-	public void afficher(ArrayList<Obstacle> l){
+	public void afficher(Bloc b){
+		/**
 		System.out.println("kjf");
 		Graphics g=this.getGraphics();
-		for(Obstacle obs : l ){
+		for(Bloc b : l ){
 			try {
-				File f = new File(obs.getUrl());
+				File f = new File(b.getUrl());
 				Image image = ImageIO.read(f);
-				g.drawImage(image, obs.getPosX()*20, obs.getPosY()*20, this);
+				g.drawImage(image, b.getPosX()*20, b.getPosY()*20, this);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+		*/
 	}
 	
 	
-	
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+	}
 	
 	
 	
 	@Override
 	public void update(Observable o, Object argO) {
 		System.out.println("notify");
-		Graphics g=this.getGraphics();
-		for(Obstacle obs : ((Jeu)o).getObstacle()){
-			try {
-				File f = new File(obs.getUrl());
-				Image image = ImageIO.read(f);
-				g.drawImage(image, obs.getPosX()*20, obs.getPosY()*20, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-//		for(Lemming lem : ((Jeu)o).getLemmings()){
-//			try {
-//				File f = new File(lem.getUrl());
-//				Image image = ImageIO.read(f);
-//				g.drawImage(image, lem.getPosX()*20, lem.getPosY()*20, this);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		this.repaint();
-
+		try {
+			Bloc b=(Bloc)o;
+			System.out.println(b.typeOf());
+			File f = new File(b.getUrl());
+			Image image = ImageIO.read(f);
+			Graphics g=this.getGraphics();
+			g.drawImage(image, b.getPosX()*20, b.getPosY()*20, this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 

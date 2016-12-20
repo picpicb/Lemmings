@@ -1,9 +1,18 @@
 package Model;
 
-public class Bloc {
+import java.util.Observable;
+import java.util.Observer;
+
+public class Bloc extends Observable{
 	protected int posX;
 	protected int posY;
 	protected String url;
+	
+	public Bloc(int x, int y, Observer o){
+		this.posX=x;
+		this.posY=y;
+	}
+	
 	public int getPosX() {
 		return posX;
 	}
@@ -21,6 +30,10 @@ public class Bloc {
 	}
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	public String typeOf(){
+		return "Bloc";
 	}
 
 }
