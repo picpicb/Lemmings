@@ -3,7 +3,15 @@ package States;
 import java.util.ArrayList;
 
 import Model.Bloc;
+import Model.Jeu;
 
-public interface State {
-	public void step(ArrayList<Bloc> obstacles,Bloc lem);
+public abstract class State {
+	
+	private Jeu jeu;
+	
+	public State(Jeu j){
+		jeu=j;
+	}
+	
+	public abstract void step(int x, int y);
 }

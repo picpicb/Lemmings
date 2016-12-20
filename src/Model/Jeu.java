@@ -40,6 +40,14 @@ public class Jeu extends Observable{
 		return listeL;
 	}
 	
+	public void setLemmings(ArrayList<Lemming> lemmings){
+		this.listeL=lemmings;
+	}
+	
+	public void setObstacles(ArrayList<Obstacle> obstacles){
+		this.listeO=obstacles;
+	}
+	
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
 		chargerNiveau(f);
