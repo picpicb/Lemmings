@@ -31,6 +31,10 @@ public class Lemming extends Bloc{
 		this.setChanged();
 		this.notifyObservers();
 	}
+	
+	public String typeOf(){
+		return "Lemming";
+	}
 
 	
 }
