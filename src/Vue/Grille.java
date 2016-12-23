@@ -15,71 +15,21 @@ import java.util.Observer;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Grille extends JPanel implements Observer{
-
-	private ArrayList<Obstacle> obstacles;
+public class Grille extends JPanel{
 
 	public Grille() {
-		this.obstacles=new ArrayList<Obstacle>();
 		this.setSize(900,600);
 		this.setLayout(null);
 		this.setBackground(Color.BLACK);
 	}
 
-
-
-	public void afficher(Bloc b){
-		/**
-		System.out.println("kjf");
-		Graphics g=this.getGraphics();
-		for(Bloc b : l ){
-			try {
-				File f = new File(b.getUrl());
-				Image image = ImageIO.read(f);
-				g.drawImage(image, b.getPosX()*20, b.getPosY()*20, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+	public void refresh(ArrayList<Lemming> listeL,ArrayList<Obstacle> listeO){
+		for(Lemming lem : listeL){
+			lem.setBounds(lem.getPosX()*20,lem.getPosY()*20,20,20);
 		}
-		 */
-	}
-
-
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		for(Obstacle b: this.obstacles){
-			try {
-				System.out.println(b.typeOf());
-				File f = new File(b.getUrl());
-				Image image = ImageIO.read(f);
-				g.drawImage(image, b.getPosX()*20, b.getPosY()*20, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		for(Obstacle obs : listeO){
+			obs.setBounds(obs.getPosX()*20,obs.getPosY()*20,20,20);
 		}
+
 	}
-
-
-
-	@Override
-	public void update(Observable o, Object argO) {
-		System.out.println("notify");
-		if(((Bloc) o).typeOf()=="Lemming"){
-			this.repaint();
-			try {
-				Lemming b=(Lemming)o;
-				System.out.println(b.typeOf());
-				File f = new File(b.getUrl());
-				Image image = ImageIO.read(f);
-				this.getGraphics().drawImage(image, b.getPosX()*20, b.getPosY()*20, this);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}else{
-			this.obstacles.add((Obstacle )o);
-			this.repaint();
-		}
-	}
-
-
 }

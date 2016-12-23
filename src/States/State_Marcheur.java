@@ -25,6 +25,7 @@ public class State_Marcheur extends State{
 
 					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).compareTo("OTerre")==0){
 						lem.setDirection(Direction.GAUCHE);
+						lem.setUrl("images/lemmings_gifs/walkl_x2.gif");
 						lem.setPosX(lem.getPosX()-1);
 					} else {
 						lem.setPosY(lem.getPosY()-1);
@@ -47,6 +48,7 @@ public class State_Marcheur extends State{
 
 					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).compareTo("OTerre")==0){
 						lem.setDirection(Direction.DROITE);
+						lem.setUrl("images/lemmings_gifs/walkr_x2.gif");
 						lem.setPosY(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);

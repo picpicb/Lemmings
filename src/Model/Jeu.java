@@ -49,14 +49,20 @@ public class Jeu{
 
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
-		chargerNiveau(f);	
-		this.listeL.add(new Lemming(8, 2, this.grille, this));
+		chargerNiveau(f);
+		Lemming l1 = new Lemming(8, 2, this);
+		this.listeL.add(l1);
+		grille.add(l1);
+		Lemming l2 = new Lemming(15, 2, this);
+		this.listeL.add(l2);
+		grille.add(l2);
+
 		while(isAlive()){
 			try {
 				Thread.sleep(200);
 				for(Lemming l: this.listeL){
 					l.step();
-				
+					grille.refresh(listeL,listeO);
 				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
@@ -100,18 +106,21 @@ public class Jeu{
 						c = lecteur.read();
 						break;
 					case 49:
-						listeO.add(new OTerre(j,i, this.grille));
+						listeO.add(new OTerre(j,i));
 						break;
 					case 50:
-						listeO.add(new OLave(j,i, this.grille));
+						listeO.add(new OLave(j,i));
 						break;
 					case 51:
-						listeO.add(new OMetal(j,i, this.grille));
+						listeO.add(new OMetal(j,i));
 						break;
 					default:
 						break;
 					}
 				}
+			}
+			for(Obstacle obs : listeO){
+				grille.add(obs);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
