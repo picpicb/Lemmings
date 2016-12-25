@@ -21,6 +21,9 @@ public class Lemming extends Bloc{
 	public void setDirection(Direction d){
 		this.direction=d;
 	}
+	public void setState(State s){
+		System.out.println("Change state"+state+" to "+s);
+	}
 
 	public void step() {
 		this.state.step(this);

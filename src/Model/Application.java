@@ -1,8 +1,15 @@
 package Model;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import Controleur.AuditeurBarreBoutons;
 import Vue.BarreBoutons;
@@ -20,19 +27,29 @@ public class Application {
 		
 		JFrame fenetre = new JFrame("Lemmings");
 		fenetre.setSize(1000, 600);
-		fenetre.setLayout(new BorderLayout());
+		BorderLayout bo = new BorderLayout();
+		bo.setVgap(0);
+		fenetre.setLayout(bo);
+		
+		
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Compteur panelCompteur = new Compteur(MAXLEMMING);
 		Grille grille = new Grille();
-		Jeu lemming = new Jeu(panelCompteur,grille,NIVEAUSTART);
-		BarreBoutons barre = new BarreBoutons(panelCompteur, new AuditeurBarreBoutons(lemming));
+		Jeu jeu = new Jeu(panelCompteur,grille,NIVEAUSTART);
+		BarreBoutons barre = new BarreBoutons(new AuditeurBarreBoutons(jeu));
 		
+		JPanel panelDroit = new JPanel();
+		panelDroit.setLayout(new BorderLayout());
+		panelDroit.add(barre,BorderLayout.NORTH);
+		panelDroit.add(panelCompteur,BorderLayout.CENTER);
+			
 		
 		fenetre.add(grille,BorderLayout.CENTER);
-		fenetre.add(barre,BorderLayout.EAST);
+		fenetre.add(panelDroit,BorderLayout.EAST);
 		fenetre.setVisible(true);
-		lemming.run();
+		fenetre.setResizable(false);
+		jeu.run();
 		
 	}	
 }

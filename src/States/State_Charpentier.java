@@ -1,5 +1,16 @@
 package States;
 
-public class State_Charpentier {
+import Model.Jeu;
+import Model.Lemming;
+
+public class State_Charpentier extends State {
+	public State_Charpentier(Jeu j) {
+		super(j);
+	}
+	@Override
+	public void step(Lemming lem) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -15,4 +15,8 @@ public abstract class State {
 	}
 	
 	public abstract void step(Lemming lem);
+	
+	public String toString(){
+		return this.getClass().getSimpleName();
+	}
 }

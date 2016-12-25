@@ -10,9 +10,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controleur.AuditeurBarreBoutons;
+import Controleur.AuditeurGrille;
 import Vue.BarreBoutons;
 import Vue.Compteur;
 import Vue.Grille;
+import States.*;
 
 
 public class Jeu{
@@ -21,13 +23,19 @@ public class Jeu{
 	private Grille grille;
 	private ArrayList<Lemming> listeL;
 	private ArrayList<Obstacle> listeO;
+	private State state;
+	private AuditeurGrille auditeurG;
 
 	public Jeu(Compteur cpt, Grille grille, int niveau){
 		this.cpt = cpt;
 		this.grille = grille;
 		this.niveau = niveau;
+		this.state = new State_Marcheur(this);
+		auditeurG = new AuditeurGrille(this);
+		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
-		listeO = new ArrayList<Obstacle>();		
+		listeO = new ArrayList<Obstacle>();	
+		
 	}
 
 
@@ -46,6 +54,45 @@ public class Jeu{
 	public void setObstacles(ArrayList<Obstacle> obstacles){
 		this.listeO=obstacles;
 	}
+	
+	public void selectedLem(int x, int y){
+		for(Lemming lem: this.listeL){
+			if(lem.getPosX()==x && lem.getPosY()==y){
+				lem.setState(state);
+			}
+		}
+	}
+	
+	public void selectedState(String s){
+		switch (s) {
+		case "Bloqueur":
+			state = new State_Bloqueur(this);
+			break;
+		case "Bomber":
+			state = new State_Bomber(this);
+			break;
+		case "Charpentier":
+			state = new State_Charpentier(this);
+			break;
+		case "Foreur":
+			state = new State_Foreur(this);
+			break;
+		case "Grimpeur":
+			state = new State_Grimpeur(this);
+			break;
+		case "Marcheur":
+			state = new State_Marcheur(this);
+			break;
+		case "Parachutiste":
+			state = new State_Parachutiste(this);
+			break;
+		case "Tunnelier":
+			state = new State_Tunnelier(this);	
+			break;
+		default:
+			break;
+		}
+	}
 
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
@@ -59,7 +106,7 @@ public class Jeu{
 
 		while(isAlive()){
 			try {
-				Thread.sleep(200);
+				Thread.sleep(400);
 				for(Lemming l: this.listeL){
 					l.step();
 					grille.refresh(listeL,listeO);

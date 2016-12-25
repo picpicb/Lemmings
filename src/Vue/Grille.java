@@ -1,6 +1,7 @@
 package Vue;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -19,7 +20,6 @@ public class Grille extends JPanel{
 
 	public Grille() {
 		this.setSize(900,600);
-		this.setLayout(null);
 		this.setBackground(Color.BLACK);
 	}
 

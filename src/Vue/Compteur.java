@@ -1,8 +1,8 @@
 package Vue;
 
-import javax.swing.JTextField;
+import javax.swing.JLabel;
 
-public class Compteur extends JTextField{
+public class Compteur extends JLabel{
 	int valeur;
 	public int getValeur() {
 		return valeur;
