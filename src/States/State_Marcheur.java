@@ -10,20 +10,16 @@ public class State_Marcheur extends State{
 		super(j);
 	}
 
+
 	public void step(Lemming lem){
-		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).compareTo("OTerre")==0){
-
+		testSortie(lem,lem.getPosX(), lem.getPosY());
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
 			//pas de vide
-
 			if(lem.getDirection()==Direction.DROITE){
-
 				// a droite
-
-				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).compareTo("OTerre")==0){
-
+				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
 					//obstacle a droite
-
-					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).compareTo("OTerre")==0){
+					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl("images/lemmings_gifs/walkl_x2.gif");
 						lem.setPosX(lem.getPosX()-1);
@@ -32,39 +28,29 @@ public class State_Marcheur extends State{
 						lem.setPosX(lem.getPosX()+1);
 					}
 				} else {
-
 					//pas obstacle a doite
-
+					
 					lem.setPosX(lem.getPosX()+1);
 				}
-
 			} else if (lem.getDirection()==Direction.GAUCHE){
-
 				// a gauche
-
-				if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).compareTo("OTerre")==0){		
-
+				if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("OTerre")){		
 					//obstacle a gauche
-
-					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).compareTo("OTerre")==0){
+					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl("images/lemmings_gifs/walkr_x2.gif");
-						lem.setPosY(lem.getPosX()+1);
+						lem.setPosX(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);
 						lem.setPosY(lem.getPosY()-1);
 					}
 				} else {
-
 					//pas obstacle a gauche
-
 					lem.setPosX(lem.getPosX()-1);
 				}
-
 			}
 		} else {
 			lem.setPosY(lem.getPosY()+1);
 		}
 	}
-
 }

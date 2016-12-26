@@ -12,6 +12,7 @@ public class Bloc extends JPanel{
 	protected int posX;
 	protected int posY;
 	protected String url;
+	protected boolean afficher;
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -29,6 +30,7 @@ public class Bloc extends JPanel{
 		this.posX=x;
 		this.posY=y;
 		this.setOpaque(false);
+		this.afficher = true;
 	}
 
 	public int getPosX() {
@@ -52,6 +54,13 @@ public class Bloc extends JPanel{
 
 	public String typeOf(){
 		return "Bloc";
+	}
+	
+	public void setAfficher(){
+		afficher = false;
+	}
+	public boolean getAfficher(){
+		return afficher;
 	}
 
 }

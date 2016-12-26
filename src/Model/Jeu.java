@@ -3,6 +3,7 @@ package Model;
 import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 
@@ -35,7 +36,7 @@ public class Jeu{
 		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
 		listeO = new ArrayList<Obstacle>();	
-		
+
 	}
 
 
@@ -54,7 +55,12 @@ public class Jeu{
 	public void setObstacles(ArrayList<Obstacle> obstacles){
 		this.listeO=obstacles;
 	}
-	
+
+	public void sortieLem(){
+		cpt.incrementer();
+	}
+
+
 	public void selectedLem(int x, int y){
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
@@ -62,7 +68,7 @@ public class Jeu{
 			}
 		}
 	}
-	
+
 	public void selectedState(String s){
 		switch (s) {
 		case "Bloqueur":
@@ -107,10 +113,15 @@ public class Jeu{
 		while(isAlive()){
 			try {
 				Thread.sleep(400);
-				for(Lemming l: this.listeL){
-					l.step();
-					grille.refresh(listeL,listeO);
+				for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
+				    Lemming l = iterator.next();
+				    l.step();
+				    if (!l.getAfficher()) {
+				    	grille.supprimer(l);
+				        iterator.remove();
+				    }
 				}
+				grille.refresh(listeL,listeO);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -160,6 +171,12 @@ public class Jeu{
 						break;
 					case 51:
 						listeO.add(new OMetal(j,i));
+						break;
+					case 52:
+						listeO.add(new OEntree(j,i));
+						break;
+					case 53:
+						listeO.add(new OSortie(j,i));
 						break;
 					default:
 						break;

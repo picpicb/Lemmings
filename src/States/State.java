@@ -19,4 +19,10 @@ public abstract class State {
 	public String toString(){
 		return this.getClass().getSimpleName();
 	}
+	public void testSortie(Lemming lem,int x, int y){
+		if(this.jeu.getObstacle(x,y).equals("OSortie")){
+			lem.setAfficher();
+			jeu.sortieLem();
+		}
+	}
 }
