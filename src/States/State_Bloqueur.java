@@ -12,7 +12,9 @@ public class State_Bloqueur extends State {
 
 	@Override
 	public void step(Lemming lem) {
-		// TODO Auto-generated method stub
-		
+		lem.setUrl("images/lemmings_gifs/block_x2.gif");
+	}
+	public String toString(){
+		return "State_Bloqueur";
 	}
 }

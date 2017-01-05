@@ -26,6 +26,8 @@ public class Jeu{
 	private ArrayList<Obstacle> listeO;
 	private State state;
 	private AuditeurGrille auditeurG;
+	private int entrX;
+	private int entrY;
 
 	public Jeu(Compteur cpt, Grille grille, int niveau){
 		this.cpt = cpt;
@@ -36,7 +38,6 @@ public class Jeu{
 		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
 		listeO = new ArrayList<Obstacle>();	
-
 	}
 
 
@@ -103,19 +104,23 @@ public class Jeu{
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
 		chargerNiveau(f);
-		Lemming l1 = new Lemming(8, 2, this);
-		this.listeL.add(l1);
-		grille.add(l1);
-		Lemming l2 = new Lemming(15, 2, this);
-		this.listeL.add(l2);
-		grille.add(l2);
-
+		int i=0;
+		int tmp=0;
 		while(isAlive()){
 			try {
+				if(i<cpt.getValeurMax() && tmp==0){
+					Lemming l1 = new Lemming(entrX, entrY, this);
+					this.listeL.add(l1);
+					grille.add(l1);
+					i++;
+					tmp = 4;
+				}
+				tmp--;
 				Thread.sleep(400);
 				for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
 				    Lemming l = iterator.next();
 				    l.step();
+				    l.role();
 				    if (!l.getAfficher()) {
 				    	grille.supprimer(l);
 				        iterator.remove();
@@ -133,6 +138,14 @@ public class Jeu{
 		for(Obstacle o: this.listeO){
 			if(o.getPosX()==x && o.getPosY()==y){
 				return o.typeOf();
+			}
+		}
+		return "null";
+	}
+	public String getLemming(int x, int y){
+		for(Lemming l: this.listeL){
+			if(l.getPosX()==x && l.getPosY()==y){
+				return l.role();
 			}
 		}
 		return "null";
@@ -174,6 +187,8 @@ public class Jeu{
 						break;
 					case 52:
 						listeO.add(new OEntree(j,i));
+						entrX = j;
+						entrY = i;
 						break;
 					case 53:
 						listeO.add(new OSortie(j,i));

@@ -22,15 +22,15 @@ public class Lemming extends Bloc{
 		this.direction=d;
 	}
 	public void setState(State s){
-		System.out.println("Change state"+state+" to "+s);
+		state = s;
 	}
 
 	public void step() {
 		this.state.step(this);
 	}
 	
-	public String typeOf(){
-		return "Lemming";
+	public String role(){
+		return state.toString();
 	}
 
 	

@@ -17,7 +17,7 @@ public abstract class State {
 	public abstract void step(Lemming lem);
 	
 	public String toString(){
-		return this.getClass().getSimpleName();
+		return "state";
 	}
 	public void testSortie(Lemming lem,int x, int y){
 		if(this.jeu.getObstacle(x,y).equals("OSortie")){

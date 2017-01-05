@@ -9,6 +9,9 @@ public class State_Marcheur extends State{
 	public State_Marcheur(Jeu j) {
 		super(j);
 	}
+	public String toString(){
+		return "State_Marcheur";
+	}
 
 
 	public void step(Lemming lem){
@@ -29,8 +32,13 @@ public class State_Marcheur extends State{
 					}
 				} else {
 					//pas obstacle a doite
-					
-					lem.setPosX(lem.getPosX()+1);
+					if(!this.jeu.getLemming(lem.getPosX()+1, lem.getPosY()).equals("State_Bloqueur")){
+						lem.setPosX(lem.getPosX()+1);
+					}else{
+						lem.setDirection(Direction.GAUCHE);
+						lem.setUrl("images/lemmings_gifs/walkl_x2.gif");
+						lem.setPosX(lem.getPosX()-1);
+					}
 				}
 			} else if (lem.getDirection()==Direction.GAUCHE){
 				// a gauche
@@ -46,7 +54,13 @@ public class State_Marcheur extends State{
 					}
 				} else {
 					//pas obstacle a gauche
-					lem.setPosX(lem.getPosX()-1);
+					if(!this.jeu.getLemming(lem.getPosX()-1, lem.getPosY()).equals("State_Bloqueur")){
+						lem.setPosX(lem.getPosX()-1);
+					}else{
+						lem.setDirection(Direction.DROITE);
+						lem.setUrl("images/lemmings_gifs/walkr_x2.gif");
+						lem.setPosX(lem.getPosX()+1);
+					}
 				}
 			}
 		} else {
