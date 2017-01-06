@@ -5,7 +5,8 @@ import Model.Jeu;
 import Model.Lemming;
 
 public class State_Marcheur extends State{
-
+	private String urll = "images/lemmings_gifs/walkl_x2.gif";
+	private String urlr = "images/lemmings_gifs/walkr_x2.gif";
 	public State_Marcheur(Jeu j) {
 		super(j);
 	}
@@ -17,6 +18,11 @@ public class State_Marcheur extends State{
 	public void step(Lemming lem){
 		testSortie(lem);
 		testOutOfMap(lem);
+		if(lem.getDirection()==Direction.DROITE){
+			lem.setUrl(urlr);
+		}else if(lem.getDirection()==Direction.GAUCHE){
+			lem.setUrl(urll);
+		}
 		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
 			//pas de vide
 			if(lem.getDirection()==Direction.DROITE){
@@ -25,7 +31,7 @@ public class State_Marcheur extends State{
 					//obstacle a droite
 					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.GAUCHE);
-						lem.setUrl("images/lemmings_gifs/walkl_x2.gif");
+						lem.setUrl(urll);
 						lem.setPosX(lem.getPosX()-1);
 					} else {
 						lem.setPosY(lem.getPosY()-1);
@@ -37,7 +43,7 @@ public class State_Marcheur extends State{
 						lem.setPosX(lem.getPosX()+1);
 					}else{
 						lem.setDirection(Direction.GAUCHE);
-						lem.setUrl("images/lemmings_gifs/walkl_x2.gif");
+						lem.setUrl(urll);
 						lem.setPosX(lem.getPosX()-1);
 					}
 				}
@@ -47,7 +53,7 @@ public class State_Marcheur extends State{
 					//obstacle a gauche
 					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.DROITE);
-						lem.setUrl("images/lemmings_gifs/walkr_x2.gif");
+						lem.setUrl(urlr);
 						lem.setPosX(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);
@@ -59,7 +65,7 @@ public class State_Marcheur extends State{
 						lem.setPosX(lem.getPosX()-1);
 					}else{
 						lem.setDirection(Direction.DROITE);
-						lem.setUrl("images/lemmings_gifs/walkr_x2.gif");
+						lem.setUrl(urlr);
 						lem.setPosX(lem.getPosX()+1);
 					}
 				}
