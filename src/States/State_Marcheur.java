@@ -15,7 +15,8 @@ public class State_Marcheur extends State{
 
 
 	public void step(Lemming lem){
-		testSortie(lem,lem.getPosX(), lem.getPosY());
+		testSortie(lem);
+		testOutOfMap(lem);
 		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
 			//pas de vide
 			if(lem.getDirection()==Direction.DROITE){

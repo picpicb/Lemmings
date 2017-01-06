@@ -22,6 +22,5 @@ public class Compteur extends JLabel{
 	public void incrementer(){
 		valeur++;
 		setText(valeur+"/"+valeurMax+" Lemming");
-
 	}
 }
