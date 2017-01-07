@@ -29,6 +29,10 @@ public abstract class State {
 	public String getUrlr() {
 		return urlr;
 	}
+	
+	public void stateInit(Lemming lem){
+		lem.setState(new State_Marcheur(jeu));
+	}
 
 	public void testSortie(Lemming lem){
 		int x= lem.getPosX();
