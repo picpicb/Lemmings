@@ -12,5 +12,5 @@ public class Obstacle extends Bloc{
 	
 	public String typeOf(){
 		return "Obstacle";
-	}
+	} 
 }

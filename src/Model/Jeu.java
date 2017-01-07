@@ -60,13 +60,19 @@ public class Jeu{
 	public void sortieLem(){
 		cpt.incrementer();
 	}
-	
-	
 
 	public void selectedLem(int x, int y){
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
 				lem.setState(state);
+			}
+		}
+	}
+	
+	public void destroyObstacle(int x, int y){
+		for(Obstacle o: this.listeO){
+			if(o.getPosX()==x && o.getPosY()==y){
+				o.setAfficher();
 			}
 		}
 	}
