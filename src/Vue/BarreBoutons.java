@@ -40,9 +40,9 @@ public class BarreBoutons extends JPanel{
 		boutons.add(new JRadioButton("Bloqueur"));
 		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/block.png")));
 		boutons.add(new JRadioButton("Bomber"));
-		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/walkr.png")));
+		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/bomberr.png")));
 		boutons.add(new JRadioButton("Charpentier"));
-		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/walkr.png")));
+		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/charr.png")));
 		boutons.add(new JRadioButton("Foreur"));
 		imgBoutons.add(new JLabel(new ImageIcon("images/lemmings_gifs/miner.png")));
 		boutons.add(new JRadioButton("Tunnelier"));
