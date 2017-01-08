@@ -39,7 +39,7 @@ public class State_Parachutiste extends State{
 					//obstacle a droite
 					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.GAUCHE);
-						//lem.setUrl(urll);
+						lem.setUrl(urll);
 						lem.setPosX(lem.getPosX()-1);
 					} else {
 						lem.setPosY(lem.getPosY()-1);
@@ -51,7 +51,7 @@ public class State_Parachutiste extends State{
 						lem.setPosX(lem.getPosX()+1);
 					}else{
 						lem.setDirection(Direction.GAUCHE);
-						//lem.setUrl(urll);
+						lem.setUrl(urll);
 						lem.setPosX(lem.getPosX()-1);
 					}
 				}
@@ -61,7 +61,7 @@ public class State_Parachutiste extends State{
 					//obstacle a gauche
 					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("OTerre")){
 						lem.setDirection(Direction.DROITE);
-						//lem.setUrl(urlr);
+						lem.setUrl(urlr);
 						lem.setPosX(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);
@@ -73,7 +73,7 @@ public class State_Parachutiste extends State{
 						lem.setPosX(lem.getPosX()-1);
 					}else{
 						lem.setDirection(Direction.DROITE);
-						//lem.setUrl(urlr);
+						lem.setUrl(urlr);
 						lem.setPosX(lem.getPosX()+1);
 					}
 				}

@@ -1,18 +1,9 @@
 package Model;
 
-import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Observable;
-
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-
-import Controleur.AuditeurBarreBoutons;
 import Controleur.AuditeurGrille;
-import Vue.BarreBoutons;
 import Vue.Compteur;
 import Vue.Grille;
 import States.*;
@@ -49,14 +40,6 @@ public class Jeu{
 
 	public ArrayList<Lemming> getLemmings(){
 		return listeL;
-	}
-
-	public void setLemmings(ArrayList<Lemming> lemmings){
-		this.listeL=lemmings;
-	}
-
-	public void setObstacles(ArrayList<Obstacle> obstacles){
-		this.listeO=obstacles;
 	}
 
 	public void sortieLem(){
@@ -114,14 +97,17 @@ public class Jeu{
 	}
 
 	public void run(){
-		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
+		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
 		chargerNiveau(f);
 		int i=0;
 		int tmp=0;
-		while(isAlive()){
+		Lemming l1 = new Lemming(entrX, entrY, this);
+		this.listeL.add(l1);
+		grille.add(l1);
+		while(!listeL.isEmpty() ){
 			try {
 				if(i<cpt.getValeurMax() && tmp==0){
-					Lemming l1 = new Lemming(entrX, entrY, this);
+					l1 = new Lemming(entrX, entrY, this);
 					this.listeL.add(l1);
 					grille.add(l1);
 					i++;
@@ -132,7 +118,6 @@ public class Jeu{
 				for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
 				    Lemming l = iterator.next();
 				    l.step();
-				    l.role();
 				    if (!l.getAfficher()) {
 				    	grille.supprimer(l);
 				        iterator.remove();
@@ -151,6 +136,7 @@ public class Jeu{
 				e.printStackTrace();
 			}
 		}
+		System.out.println("FIIIIINN");
 	}
 
 	public String getObstacle(int x, int y){
@@ -170,13 +156,13 @@ public class Jeu{
 		return "null";
 	}
 
-	public boolean isAlive(){
+	/*public boolean isAlive(){
 		if(cpt.getValeur() != cpt.getValeurMax()){
 			return true;
 		}else{
 			return false;
 		}
-	}
+	}*/
 
 	public void chargerNiveau(File f){
 		InputStream in = null;

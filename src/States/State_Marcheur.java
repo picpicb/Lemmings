@@ -25,7 +25,7 @@ public class State_Marcheur extends State{
 		}else if(lem.getDirection()==Direction.GAUCHE){
 			lem.setUrl(urll);
 		}
-		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre") || this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OMetal")){
 			//pas de vide
 			if(chute <= 0){
 				lem.setAfficher();
