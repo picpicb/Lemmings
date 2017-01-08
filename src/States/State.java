@@ -9,6 +9,8 @@ import Model.Lemming;
 public abstract class State {
 	
 	protected Jeu jeu;
+	private String urll;
+	private String urlr;
 	
 	public State(Jeu j){
 		jeu=j;
@@ -20,6 +22,18 @@ public abstract class State {
 		return "state";
 	}
 	
+	public String getUrll() {
+		return urll;
+	}
+
+	public String getUrlr() {
+		return urlr;
+	}
+	
+	public void stateInit(Lemming lem){
+		lem.setState(new State_Marcheur(jeu));
+	}
+
 	public void testSortie(Lemming lem){
 		int x= lem.getPosX();
 		int y= lem.getPosY();
