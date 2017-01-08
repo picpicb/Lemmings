@@ -133,6 +133,13 @@ public class Jeu{
 				        iterator.remove();
 				    }
 				}
+				for (Iterator<Obstacle> iterator = listeO.iterator(); iterator.hasNext(); ) {
+				    Obstacle l = iterator.next();
+				    if (!l.getAfficher()) {
+				    	grille.supprimer(l);
+				        iterator.remove();
+				    }
+				}
 				grille.refresh(listeL,listeO);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block

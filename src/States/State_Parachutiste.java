@@ -25,6 +25,7 @@ public class State_Parachutiste extends State{
 			this.tombe=!this.tombe;
 		}else{
 			//pas de vide
+			this.tombe=false;
 			if(lem.getDirection()==Direction.DROITE){
 				// a droite
 				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
