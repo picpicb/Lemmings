@@ -25,6 +25,7 @@ public class Jeu{
 	private ArrayList<Lemming> listeL;
 	private ArrayList<Obstacle> listeO;
 	private State state;
+	private String selectedState;
 	private AuditeurGrille auditeurG;
 	private int entrX;
 	private int entrY;
@@ -34,6 +35,7 @@ public class Jeu{
 		this.grille = grille;
 		this.niveau = niveau;
 		this.state = new State_Marcheur(this);
+		this.selectedState = "";
 		auditeurG = new AuditeurGrille(this);
 		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
@@ -65,6 +67,8 @@ public class Jeu{
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
 				lem.setState(state);
+				selectedState(selectedState);
+				
 			}
 		}
 	}
@@ -78,6 +82,7 @@ public class Jeu{
 	}
 
 	public void selectedState(String s){
+		selectedState = s;
 		switch (s) {
 		case "Bloqueur":
 			state = new State_Bloqueur(this);
