@@ -6,8 +6,8 @@ import Model.Lemming;
 import States.*;
 
 public class State_Bloqueur extends State {
-	private String urll = "images/lemmings_gifs/block_x2.png";
-	private String urlr = "images/lemmings_gifs/block_x2.png";
+	private String urll = "images/lemmings_gifs/block.png";
+	private String urlr = "images/lemmings_gifs/block.png";
 	public State_Bloqueur(Jeu j) {
 		super(j);
 	}

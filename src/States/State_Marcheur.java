@@ -5,10 +5,12 @@ import Model.Jeu;
 import Model.Lemming;
 
 public class State_Marcheur extends State{
-	private String urll = "images/lemmings_gifs/walkl_x2.gif";
-	private String urlr = "images/lemmings_gifs/walkr_x2.gif";
+	private String urll = "images/lemmings_gifs/walkl.png";
+	private String urlr = "images/lemmings_gifs/walkr.png";
+	private int chute;
 	public State_Marcheur(Jeu j) {
 		super(j);
+		chute = 5;
 	}
 	public String toString(){
 		return "State_Marcheur";
@@ -25,6 +27,10 @@ public class State_Marcheur extends State{
 		}
 		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
 			//pas de vide
+			if(chute <= 0){
+				lem.setAfficher();
+			}
+			chute = 5;
 			if(lem.getDirection()==Direction.DROITE){
 				// a droite
 				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
@@ -72,6 +78,7 @@ public class State_Marcheur extends State{
 			}
 		} else {
 			lem.setPosY(lem.getPosY()+1);
+			chute--;
 		}
 	}
 }

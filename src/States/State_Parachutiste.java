@@ -7,7 +7,9 @@ import Model.Lemming;
 public class State_Parachutiste extends State{
 
 	private boolean tombe;
-
+	private String urll = "images/lemmings_gifs/paral.png";
+	private String urlr = "images/lemmings_gifs/parar.png";
+	
 	public State_Parachutiste(Jeu j) {
 		super(j);
 		this.tombe=true;
@@ -17,6 +19,11 @@ public class State_Parachutiste extends State{
 	public void step(Lemming lem) {
 		testSortie(lem);
 		testOutOfMap(lem);
+		if(lem.getDirection()==Direction.DROITE){
+			lem.setUrl(urlr);
+		}else if(lem.getDirection()==Direction.GAUCHE){
+			lem.setUrl(urll);
+		}
 		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
 			//si il tombe
 			if(this.tombe){
