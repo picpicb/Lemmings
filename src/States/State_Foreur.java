@@ -14,6 +14,8 @@ public class State_Foreur extends State{
 
 	@Override
 	public void step(Lemming lem) {
+		testSortie(lem);
+		testOutOfMap(lem);
 		if(this.duree>0){
 			String bloc=jeu.getObstacle(lem.getPosX(), lem.getPosY()+1);
 			if(bloc.compareTo("OTerre")==0){
@@ -22,6 +24,9 @@ public class State_Foreur extends State{
 				lem.setPosY(lem.getPosY()+1);
 			}else if(bloc.compareTo("OMetal")==0){
 				this.duree=0;
+			}else if(bloc.compareTo("null")==0){
+				lem.setPosY(lem.getPosY()+1);
+				this.duree--;
 			}
 		}
 		if(this.duree<=0){
