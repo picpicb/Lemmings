@@ -104,7 +104,7 @@ public class Jeu{
 		Lemming l1 = new Lemming(entrX, entrY, this);
 		this.listeL.add(l1);
 		grille.add(l1);
-		while(!listeL.isEmpty() ){
+		while(!listeL.isEmpty() ){ 
 			try {
 				if(i<cpt.getValeurMax() && tmp==0){
 					l1 = new Lemming(entrX, entrY, this);
