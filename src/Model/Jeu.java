@@ -20,6 +20,7 @@ public class Jeu{
 	private AuditeurGrille auditeurG;
 	private int entrX;
 	private int entrY;
+	private boolean quitter;
 
 	public Jeu(Compteur cpt, Grille grille, int niveau){
 		this.cpt = cpt;
@@ -31,8 +32,11 @@ public class Jeu{
 		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
 		listeO = new ArrayList<Obstacle>();	
+		quitter = false;
 	}
-
+	public void setNiveau(int niveau){
+		this.niveau = niveau;
+	}
 
 	public ArrayList<Obstacle> getObstacles(){
 		return listeO;
@@ -95,48 +99,54 @@ public class Jeu{
 			break;
 		}
 	}
+	public void quitter(){
+		quitter = true; 
+	}
 
 	public void run(){
-		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
-		chargerNiveau(f);
-		int i=0;
-		int tmp=0;
-		Lemming l1 = new Lemming(entrX, entrY, this);
-		this.listeL.add(l1);
-		grille.add(l1);
-		while(!listeL.isEmpty() ){ 
-			try {
-				if(i<cpt.getValeurMax() && tmp==0){
-					l1 = new Lemming(entrX, entrY, this);
-					this.listeL.add(l1);
-					grille.add(l1);
-					i++;
-					tmp = 4;
+		while(!quitter){
+			int i=0;
+			int tmp=0;
+			Lemming l1 = new Lemming(entrX, entrY, this);
+			this.listeL.add(l1);
+			grille.add(l1);
+			while(!listeL.isEmpty() ){ 
+				try {
+					if(i<2 && tmp==0){
+						l1 = new Lemming(entrX, entrY, this);
+						this.listeL.add(l1);
+						grille.add(l1);
+						i++;
+						tmp = 4;
+					}
+					tmp--;
+					Thread.sleep(400);
+					for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
+					    Lemming l = iterator.next();
+					    l.step();
+					    if (!l.getAfficher()) {
+					    	grille.supprimer(l);
+					        iterator.remove();
+					    }
+					}
+					for (Iterator<Obstacle> iterator = listeO.iterator(); iterator.hasNext(); ) {
+					    Obstacle l = iterator.next();
+					    if (!l.getAfficher()) {
+					    	grille.supprimer(l);
+					        iterator.remove();
+					    }
+					}
+					grille.refresh(listeL,listeO);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				tmp--;
-				Thread.sleep(400);
-				for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
-				    Lemming l = iterator.next();
-				    l.step();
-				    if (!l.getAfficher()) {
-				    	grille.supprimer(l);
-				        iterator.remove();
-				    }
-				}
-				for (Iterator<Obstacle> iterator = listeO.iterator(); iterator.hasNext(); ) {
-				    Obstacle l = iterator.next();
-				    if (!l.getAfficher()) {
-				    	grille.supprimer(l);
-				        iterator.remove();
-				    }
-				}
-				grille.refresh(listeL,listeO);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			}
+			grille.finJeu();
+			while(!quitter){
+				
 			}
 		}
-		System.out.println("FIIIIINN");
 	}
 
 	public String getObstacle(int x, int y){
@@ -164,7 +174,8 @@ public class Jeu{
 		}
 	}*/
 
-	public void chargerNiveau(File f){
+	public void chargerNiveau(){
+		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
 		InputStream in = null;
 		try {
 			in = new FileInputStream(f);

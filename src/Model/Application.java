@@ -38,6 +38,8 @@ public class Application {
 		fenetre.add(panelDroit,BorderLayout.EAST);
 		fenetre.setVisible(true);
 		fenetre.setResizable(false);
+		jeu.setNiveau(1);
+		jeu.chargerNiveau();
 		jeu.run();
 		
 	}	
