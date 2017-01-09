@@ -48,5 +48,10 @@ public abstract class State {
 			lem.setAfficher();
 		}
 	}
+	public void testLave(Lemming lem){
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()).equals("OLave")){
+			lem.setAfficher();
+		}
+	}
 	
 }

@@ -14,7 +14,19 @@ public class State_Bloqueur extends State {
 
 	@Override
 	public void step(Lemming lem) {
-			lem.setUrl(urlr);
+		testSortie(lem);
+		testOutOfMap(lem);
+		testLave(lem);
+		lem.setUrl(urlr);
+		if(lem.getChute() <= 0){
+			lem.setAfficher();
+		}
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
+			lem.setPosY(lem.getPosY()+1);
+			lem.decChute();
+		}else{
+			lem.resetChute();
+		}
 	}
 	public String toString(){
 		return "State_Bloqueur";

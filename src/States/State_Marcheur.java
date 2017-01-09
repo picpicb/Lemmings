@@ -7,10 +7,8 @@ import Model.Lemming;
 public class State_Marcheur extends State{
 	private String urll = "images/lemmings_gifs/walkl.png";
 	private String urlr = "images/lemmings_gifs/walkr.png";
-	private int chute;
 	public State_Marcheur(Jeu j) {
 		super(j);
-		chute = 5;
 	}
 	public String toString(){
 		return "State_Marcheur";
@@ -20,25 +18,25 @@ public class State_Marcheur extends State{
 	public void step(Lemming lem){
 		testSortie(lem);
 		testOutOfMap(lem);
+		testLave(lem);
 		if(lem.getDirection()==Direction.DROITE){
 			lem.setUrl(urlr);
 		}else if(lem.getDirection()==Direction.GAUCHE){
 			lem.setUrl(urll);
 		}
-		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre") || this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OMetal")){
+		if(!this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
 			//pas de vide
-			if(chute <= 0){
+			if(lem.getChute() <= 0){
 				lem.setAfficher();
 			}
-			chute = 5;
+			lem.resetChute();
 			if(lem.getDirection()==Direction.DROITE){
 				// a droite
-				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
+				if(!this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("null")){
 					//obstacle a droite
-					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("OTerre")){
+					if(!this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("null")){
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
-						lem.setPosX(lem.getPosX()-1);
 					} else {
 						lem.setPosY(lem.getPosY()-1);
 						lem.setPosX(lem.getPosX()+1);
@@ -50,17 +48,15 @@ public class State_Marcheur extends State{
 					}else{
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
-						lem.setPosX(lem.getPosX()-1);
 					}
 				}
 			} else if (lem.getDirection()==Direction.GAUCHE){
 				// a gauche
-				if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("OTerre")){		
+				if(!this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("null")){		
 					//obstacle a gauche
-					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("OTerre")){
+					if(!this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("null")){
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl(urlr);
-						lem.setPosX(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);
 						lem.setPosY(lem.getPosY()-1);
@@ -72,13 +68,12 @@ public class State_Marcheur extends State{
 					}else{
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl(urlr);
-						lem.setPosX(lem.getPosX()+1);
 					}
 				}
 			}
 		} else {
 			lem.setPosY(lem.getPosY()+1);
-			chute--;
+			lem.decChute();
 		}
 	}
 }

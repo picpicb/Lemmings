@@ -41,6 +41,6 @@ public class Application {
 		jeu.setNiveau(1);
 		jeu.chargerNiveau();
 		jeu.run();
-		
+		System.exit(0);	
 	}	
 }

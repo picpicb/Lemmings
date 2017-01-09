@@ -18,6 +18,7 @@ public class State_Foreur extends State{
 	public void step(Lemming lem) {
 		testSortie(lem);
 		testOutOfMap(lem);
+		testLave(lem);
 		if(lem.getDirection()==Direction.DROITE){
 			lem.setUrl(urlr);
 		}else if(lem.getDirection()==Direction.GAUCHE){
@@ -25,7 +26,10 @@ public class State_Foreur extends State{
 		}
 		boolean step=false;
 		if(this.duree>0){
-			System.out.println("duree >0");
+			if(lem.getChute() <= 0){
+				lem.setAfficher();
+			}
+			lem.resetChute();
 			String bloc=jeu.getObstacle(lem.getPosX(), lem.getPosY()+1);
 			if(bloc.compareTo("OTerre")==0){
 				jeu.destroyObstacle(lem.getPosX(), lem.getPosY()+1);
@@ -34,6 +38,7 @@ public class State_Foreur extends State{
 			}else if(bloc.compareTo("null")==0){
 				lem.setPosY(lem.getPosY()+1);
 				this.duree--;
+				lem.decChute();
 			}else{
 				this.duree--;
 				step=true;

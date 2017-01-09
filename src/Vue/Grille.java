@@ -41,9 +41,5 @@ public class Grille extends JPanel{
 	public void finJeu(){
 		removeAll();
 		repaint();
-		JButton quitter = new JButton("Quitter");
-		JButton suivant = new JButton("Suivant");
-		//add(quitter);
-		//add(suivant);
 	}
 }

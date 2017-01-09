@@ -10,6 +10,6 @@ public class OMetal extends Obstacle {
 		this.url = "images/metal.png";
 	}
 	public String typeOf(){
-		return "OTerre";
+		return "OMetal";
 	}
 }

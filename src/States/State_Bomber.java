@@ -8,17 +8,16 @@ public class State_Bomber extends State {
 	private String urll = "images/lemmings_gifs/bomberl.png";
 	private String urlr = "images/lemmings_gifs/bomberr.png";
 	private int pas;
-	private int chute;
 
 	public State_Bomber(Jeu j) {
 		super(j);
 		pas = 0;
-		chute = 5;
 	}
 	@Override
 	public void step(Lemming lem) {
 		testSortie(lem);
 		testOutOfMap(lem);
+		testLave(lem);
 		if(lem.getDirection()==Direction.DROITE){
 			lem.setUrl(urlr);
 		}else if(lem.getDirection()==Direction.GAUCHE){
@@ -37,20 +36,19 @@ public class State_Bomber extends State {
 			}
 			return;
 		}
-		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OTerre")){
+		if(!this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
 			//pas de vide
-			if(chute <= 0){
+			if(lem.getChute() <= 0){
 				lem.setAfficher();
 			}
-			chute = 5;
+			lem.resetChute();
 			if(lem.getDirection()==Direction.DROITE){
 				// a droite
-				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
+				if(!this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("null")){
 					//obstacle a droite
-					if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("OTerre")){
+					if(!this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()-1).equals("null")){
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
-						lem.setPosX(lem.getPosX()-1);
 					} else {
 						lem.setPosY(lem.getPosY()-1);
 						lem.setPosX(lem.getPosX()+1);
@@ -62,17 +60,15 @@ public class State_Bomber extends State {
 					}else{
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
-						lem.setPosX(lem.getPosX()-1);
 					}
 				}
 			} else if (lem.getDirection()==Direction.GAUCHE){
 				// a gauche
-				if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("OTerre")){		
+				if(!this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("null")){		
 					//obstacle a gauche
-					if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("OTerre")){
+					if(!this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()-1).equals("null")){
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl(urlr);
-						lem.setPosX(lem.getPosX()+1);
 					} else {
 						lem.setPosX(lem.getPosX()-1);
 						lem.setPosY(lem.getPosY()-1);
@@ -84,13 +80,12 @@ public class State_Bomber extends State {
 					}else{
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl(urlr);
-						lem.setPosX(lem.getPosX()+1);
 					}
 				}
 			}
 		} else {
 			lem.setPosY(lem.getPosY()+1);
-			chute--;
+			lem.decChute();
 		}
 		
 	}

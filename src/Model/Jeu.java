@@ -67,7 +67,11 @@ public class Jeu{
 			}
 		}
 	}
-
+	public void createTerre(int x, int y){
+		OTerre t = new OTerre(x,y);
+		listeO.add(t);
+		grille.add(t);
+	}
 	public void selectedState(String s){
 		selectedState = s;
 		switch (s) {
@@ -104,7 +108,6 @@ public class Jeu{
 	}
 
 	public void run(){
-		while(!quitter){
 			int i=0;
 			int tmp=0;
 			Lemming l1 = new Lemming(entrX, entrY, this);
@@ -112,7 +115,7 @@ public class Jeu{
 			grille.add(l1);
 			while(!listeL.isEmpty() ){ 
 				try {
-					if(i<2 && tmp==0){
+					if(i<cpt.getValeurMax() && tmp==0){
 						l1 = new Lemming(entrX, entrY, this);
 						this.listeL.add(l1);
 						grille.add(l1);
@@ -143,10 +146,6 @@ public class Jeu{
 				}
 			}
 			grille.finJeu();
-			while(!quitter){
-				
-			}
-		}
 	}
 
 	public String getObstacle(int x, int y){
