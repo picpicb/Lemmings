@@ -13,29 +13,16 @@ public class AuditeurGrille implements MouseListener{
 	}
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		jeu.selectedLem((e.getX())/20,(e.getY())/20);
-		
+		jeu.changeLemmingState((e.getX())/20,(e.getY())/20);
 	}
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) {}
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) {}
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 }
 
 

@@ -15,20 +15,16 @@ public class Application {
 	private static final int NIVEAUSTART = 1;
 
 	public static void main(String[] args) {
-		
+		//Creation de la fenetre de l'application
 		JFrame fenetre = new JFrame("Lemmings");
 		fenetre.setSize(1000, 600);
 		fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		BorderLayout bo = new BorderLayout();
-		bo.setVgap(0);
-		fenetre.setLayout(bo);
-		
 		Compteur panelCompteur = new Compteur(MAXLEMMING);
 		Grille grille = new Grille();
-		Jeu jeu = new Jeu(panelCompteur,grille,NIVEAUSTART);
-		
+		Jeu jeu = new Jeu(panelCompteur,grille,NIVEAUSTART);	
 		BarreBoutons barre = new BarreBoutons(new AuditeurBarreBoutons(jeu));
+		
 		JPanel panelDroit = new JPanel();
 		panelDroit.setLayout(new BorderLayout());
 		panelDroit.add(barre,BorderLayout.NORTH);
@@ -38,9 +34,9 @@ public class Application {
 		fenetre.add(panelDroit,BorderLayout.EAST);
 		fenetre.setVisible(true);
 		fenetre.setResizable(false);
-		jeu.setNiveau(1);
-		jeu.chargerNiveau();
-		jeu.run();
+		jeu.setNiveau(1); //selection du premier niveau
+		jeu.chargerNiveau(); //chargement du niveau
+		jeu.run(); //lancement du jeu
 		System.exit(0);	
 	}	
 }

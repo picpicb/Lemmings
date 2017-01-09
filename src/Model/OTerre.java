@@ -7,7 +7,7 @@ public class OTerre extends Obstacle {
 		super(x,y);
 		this.url ="images/terre.png";
 	}
-	
+	@Override
 	public String typeOf(){
 		return "OTerre";
 	}

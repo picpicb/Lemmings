@@ -27,12 +27,12 @@ public class State_Foreur extends State{
 		boolean step=false;
 		if(this.duree>0){
 			if(lem.getChute() <= 0){
-				lem.setAfficher();
+				lem.nePasAfficher();
 			}
 			lem.resetChute();
-			String bloc=jeu.getObstacle(lem.getPosX(), lem.getPosY()+1);
+			String bloc=jeu.getTypeObstacle(lem.getPosX(), lem.getPosY()+1);
 			if(bloc.compareTo("OTerre")==0){
-				jeu.destroyObstacle(lem.getPosX(), lem.getPosY()+1);
+				jeu.removeObstacle(lem.getPosX(), lem.getPosY()+1);
 				this.duree--;
 				lem.setPosY(lem.getPosY()+1);
 			}else if(bloc.compareTo("null")==0){

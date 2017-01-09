@@ -23,24 +23,24 @@ public class State_Tunnelier extends State{
 		}else if(lem.getDirection()==Direction.GAUCHE){
 			lem.setUrl(urll);
 		}
-		if(!this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
+		if(!this.jeu.getTypeObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
 			//pas de vide
 			if(lem.getChute() <= 0){
-				lem.setAfficher();
+				lem.nePasAfficher();
 			}
 			lem.resetChute();
 			if(lem.getDirection()==Direction.DROITE){
 				// a droite
-				if(this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
+				if(this.jeu.getTypeObstacle(lem.getPosX()+1, lem.getPosY()).equals("OTerre")){
 					//obstacle a droite à creuser
-					jeu.destroyObstacle(lem.getPosX()+1, lem.getPosY());
+					jeu.removeObstacle(lem.getPosX()+1, lem.getPosY());
 					creuse = true;
 					lem.setPosX(lem.getPosX()+1);
 				}else{
 					//pas obstacle a doite
 					if(creuse)
 						this.stateInit(lem);
-					if(this.jeu.getLemming(lem.getPosX()+1, lem.getPosY()).equals("State_Bloqueur") || this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("OMetal")){
+					if(this.jeu.getRoleLemming(lem.getPosX()+1, lem.getPosY()).equals("State_Bloqueur") || this.jeu.getTypeObstacle(lem.getPosX()+1, lem.getPosY()).equals("OMetal")){
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
 					}else{
@@ -49,16 +49,16 @@ public class State_Tunnelier extends State{
 				}
 			} else if (lem.getDirection()==Direction.GAUCHE){
 				// a gauche
-				if(this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("OTerre")){		
+				if(this.jeu.getTypeObstacle(lem.getPosX()-1, lem.getPosY()).equals("OTerre")){		
 					//obstacle a gauche a creuser
-					jeu.destroyObstacle(lem.getPosX()-1, lem.getPosY());
+					jeu.removeObstacle(lem.getPosX()-1, lem.getPosY());
 					creuse = true;
 					lem.setPosX(lem.getPosX()-1);
 				}else{
 					//pas obstacle a gauche
 					if(creuse)
 						this.stateInit(lem);
-					if(this.jeu.getLemming(lem.getPosX()-1, lem.getPosY()).equals("State_Bloqueur") || this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("OMetal")){
+					if(this.jeu.getRoleLemming(lem.getPosX()-1, lem.getPosY()).equals("State_Bloqueur") || this.jeu.getTypeObstacle(lem.getPosX()-1, lem.getPosY()).equals("OMetal")){
 						lem.setDirection(Direction.DROITE);
 						lem.setUrl(urlr);
 					}else{

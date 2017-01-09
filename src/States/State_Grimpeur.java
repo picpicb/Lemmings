@@ -23,33 +23,33 @@ public class State_Grimpeur extends State{
 		}
 
 		if(lem.getChute() <= 0){
-			lem.setAfficher();
+			lem.nePasAfficher();
 		}
 		lem.resetChute();
 
-		if(!this.jeu.getObstacle(lem.getPosX()+1, lem.getPosY()).equals("null") || !this.jeu.getObstacle(lem.getPosX()-1, lem.getPosY()).equals("null")){
-			if(!jeu.getObstacle(lem.getPosX(), lem.getPosY()-1).equals("null")){
+		if(!this.jeu.getTypeObstacle(lem.getPosX()+1, lem.getPosY()).equals("null") || !this.jeu.getTypeObstacle(lem.getPosX()-1, lem.getPosY()).equals("null")){
+			if(!jeu.getTypeObstacle(lem.getPosX(), lem.getPosY()-1).equals("null")){
 				this.stateInit(lem);
 			}else{
 				lem.setPosY(lem.getPosY()-1);
 			}
 		} else {
 
-			if(!jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
+			if(!jeu.getTypeObstacle(lem.getPosX(), lem.getPosY()+1).equals("null")){
 
 				if(lem.getChute() <= 0){
-					lem.setAfficher();
+					lem.nePasAfficher();
 				}
 				lem.resetChute();
 				if(lem.getDirection()==Direction.DROITE){
-					if(!this.jeu.getLemming(lem.getPosX()+1, lem.getPosY()).equals("State_Bloqueur")){
+					if(!this.jeu.getRoleLemming(lem.getPosX()+1, lem.getPosY()).equals("State_Bloqueur")){
 						lem.setPosX(lem.getPosX()+1);
 					}else{
 						lem.setDirection(Direction.GAUCHE);
 						lem.setUrl(urll);
 					}
 				} else if (lem.getDirection()==Direction.GAUCHE){
-					if(!this.jeu.getLemming(lem.getPosX()-1, lem.getPosY()).equals("State_Bloqueur")){
+					if(!this.jeu.getRoleLemming(lem.getPosX()-1, lem.getPosY()).equals("State_Bloqueur")){
 						lem.setPosX(lem.getPosX()-1);
 					}else{
 						lem.setDirection(Direction.DROITE);
@@ -57,10 +57,10 @@ public class State_Grimpeur extends State{
 					}
 				}
 			}else{
-				if(!jeu.getObstacle(lem.getPosX()+1, lem.getPosY()+1).equals("null")){
+				if(!jeu.getTypeObstacle(lem.getPosX()+1, lem.getPosY()+1).equals("null")){
 					lem.setPosX(lem.getPosX()+1);
 					this.stateInit(lem);
-				}else if(!jeu.getObstacle(lem.getPosX()-1, lem.getPosY()+1).equals("null")){
+				}else if(!jeu.getTypeObstacle(lem.getPosX()-1, lem.getPosY()+1).equals("null")){
 					lem.setPosX(lem.getPosX()-1);
 					this.stateInit(lem);
 				}else{

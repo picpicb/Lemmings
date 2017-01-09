@@ -15,8 +15,17 @@ public class Bloc extends JPanel{
 	protected boolean afficher;
 
 	/**
-	 * permet de dessiner un bloc
+	 * Un bloc est la classe mere des obstacles et des lemmings
+	 * Il s'agit d'un carre avec une image
 	 */
+	
+	public Bloc(int x, int y){
+		this.posX=x;
+		this.posY=y;
+		this.setOpaque(false);
+		this.afficher = true;
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -27,13 +36,6 @@ public class Bloc extends JPanel{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public Bloc(int x, int y){
-		this.posX=x;
-		this.posY=y;
-		this.setOpaque(false);
-		this.afficher = true;
 	}
 
 	public int getPosX() {
@@ -48,9 +50,7 @@ public class Bloc extends JPanel{
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public String getUrl() {
-		return url;
-	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -60,18 +60,17 @@ public class Bloc extends JPanel{
 	 * @return
 	 */
 	public String typeOf(){
-		return "Bloc";
+		return "null";
 	}
 	
 	/**
 	 * permet de supprimer un bloc du jeu
 	 * si l'attribut afficher est faux
-	 * le bloc sera supprimé au prochain pas du jeu
+	 * le bloc sera supprime au prochain pas du jeu
 	 */
-	public void setAfficher(){
+	public void nePasAfficher(){
 		afficher = false;
 	}
-	
 	
 	public boolean getAfficher(){
 		return afficher;

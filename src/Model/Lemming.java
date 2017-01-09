@@ -11,14 +11,13 @@ public class Lemming extends Bloc{
 	public Lemming(int x, int y, Jeu jeu) {
 		super(x, y);
 		direction = Direction.DROITE;
-		this.url = "images/lemmings_gifs/walkr_x2.gif";
 		this.state=new State_Marcheur(jeu);
 		chute = 5;
 	}
 	
 	/**
 	 * permet de savoir depuis combien de temps le lemming tombe
-	 * si ce nombre est inferieur a 1, il est alors supprimé
+	 * si ce nombre est inferieur a 1, il est alors supprime
 	 */
 	public void decChute(){
 		chute--;
@@ -26,7 +25,7 @@ public class Lemming extends Bloc{
 	
 	/**
 	 * on reinitialise la chute
-	 * methode utilisée si le lemming tombe et survis
+	 * methode utilisee si le lemming tombe et survis
 	 */
 	public void resetChute(){
 		chute = 5;

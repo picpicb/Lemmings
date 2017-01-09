@@ -15,8 +15,8 @@ public class AuditeurBarreBoutons implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println(((JRadioButton)e.getSource()).getText());
+		//Change de role selectionne grace aux boutons dans le jeu
 		jeu.selectedState(((JRadioButton)e.getSource()).getText());
 	}
-
 }
+
