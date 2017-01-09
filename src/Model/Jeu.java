@@ -3,6 +3,9 @@ package Model;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import javax.swing.JOptionPane;
+
 import Controleur.AuditeurGrille;
 import Vue.Compteur;
 import Vue.Grille;
@@ -20,6 +23,8 @@ public class Jeu{
 	private AuditeurGrille auditeurG;
 	private int entrX;
 	private int entrY;
+	private int sortieX;
+	private int sortieY;
 	private boolean quitter;
 
 	public Jeu(Compteur cpt, Grille grille, int niveau){
@@ -146,6 +151,8 @@ public class Jeu{
 				}
 			}
 			grille.finJeu();
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauvés", "Fin", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	public String getObstacle(int x, int y){
@@ -164,14 +171,6 @@ public class Jeu{
 		}
 		return "null";
 	}
-
-	/*public boolean isAlive(){
-		if(cpt.getValeur() != cpt.getValeurMax()){
-			return true;
-		}else{
-			return false;
-		}
-	}*/
 
 	public void chargerNiveau(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
@@ -207,6 +206,8 @@ public class Jeu{
 						break;
 					case 53:
 						listeO.add(new OSortie(j,i));
+						sortieX = j;
+						sortieY = i;
 						break;
 					default:
 						break;
@@ -219,5 +220,11 @@ public class Jeu{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	public int getSortieX() {
+		return sortieX;
+	}
+	public int getSortieY() {
+		return sortieY;
 	}
 }

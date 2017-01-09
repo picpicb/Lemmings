@@ -37,7 +37,7 @@ public abstract class State {
 	public void testSortie(Lemming lem){
 		int x= lem.getPosX();
 		int y= lem.getPosY();
-		if(this.jeu.getObstacle(x,y).equals("OSortie")){
+		if(x == jeu.getSortieX() && y==jeu.getSortieY()){
 			lem.setAfficher();
 			jeu.sortieLem();
 		}
@@ -49,7 +49,7 @@ public abstract class State {
 		}
 	}
 	public void testLave(Lemming lem){
-		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()).equals("OLave")){
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OLave")){
 			lem.setAfficher();
 		}
 	}
