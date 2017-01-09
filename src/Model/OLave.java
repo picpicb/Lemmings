@@ -9,4 +9,7 @@ public class OLave extends Obstacle {
 		destructible = false;
 		this.url = "images/lave.png";
 	}
+	public String typeOf(){
+		return "OLave";
+	}
 }

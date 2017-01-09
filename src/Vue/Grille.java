@@ -14,6 +14,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Grille extends JPanel{
@@ -35,5 +36,10 @@ public class Grille extends JPanel{
 	}
 	public void supprimer(Bloc b){
 		remove(b);
+	}
+	
+	public void finJeu(){
+		removeAll();
+		repaint();
 	}
 }

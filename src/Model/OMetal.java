@@ -9,4 +9,7 @@ public class OMetal extends Obstacle {
 		destructible = false;
 		this.url = "images/metal.png";
 	}
+	public String typeOf(){
+		return "OMetal";
+	}
 }

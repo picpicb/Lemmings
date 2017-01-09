@@ -3,7 +3,8 @@ package Vue;
 import javax.swing.JLabel;
 
 public class Compteur extends JLabel{
-	int valeur;
+	private int valeur;
+	private int valeurMax;
 	public int getValeur() {
 		return valeur;
 	}
@@ -12,7 +13,6 @@ public class Compteur extends JLabel{
 		return valeurMax;
 	}
 
-	int valeurMax;
 	public Compteur(int valeurMax) {
 		this.valeurMax = valeurMax;
 		this.valeur = 0;
@@ -21,6 +21,6 @@ public class Compteur extends JLabel{
 	
 	public void incrementer(){
 		valeur++;
-		setText(valeur+"/"+valeurMax+" Lemming");
+		setText(this.valeur+"/"+this.valeurMax+" Lemming");
 	}
 }

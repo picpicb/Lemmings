@@ -7,6 +7,6 @@ public class OSortie extends Obstacle{
 		this.url = "images/sortie.png";
 	}
 	public String typeOf(){
-		return "OSortie";
+		return "null";
 	}
 }

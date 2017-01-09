@@ -7,5 +7,7 @@ public class OEntree extends Obstacle{
 		destructible = false;
 		this.url = "images/depart.png";
 	}
-	
+	public String typeOf(){
+		return "null";
+	}
 }

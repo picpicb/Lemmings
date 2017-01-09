@@ -1,18 +1,12 @@
 package Model;
 
-import java.awt.Color;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Observable;
 
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
-import Controleur.AuditeurBarreBoutons;
 import Controleur.AuditeurGrille;
-import Vue.BarreBoutons;
 import Vue.Compteur;
 import Vue.Grille;
 import States.*;
@@ -27,36 +21,36 @@ public class Jeu{
 	private ArrayList<Lemming> listeL;
 	private ArrayList<Obstacle> listeO;
 	private State state;
+	private String selectedState;
 	private AuditeurGrille auditeurG;
 	private int entrX;
 	private int entrY;
+	private int sortieX;
+	private int sortieY;
+	private boolean quitter;
 
 	public Jeu(Compteur cpt, Grille grille, int niveau){
 		this.cpt = cpt;
 		this.grille = grille;
 		this.niveau = niveau;
 		this.state = new State_Marcheur(this);
+		this.selectedState = "";
 		auditeurG = new AuditeurGrille(this);
 		this.grille.addMouseListener(auditeurG);
 		listeL = new ArrayList<Lemming>();
 		listeO = new ArrayList<Obstacle>();	
+		quitter = false;
 	}
-
 	
+	public void setNiveau(int niveau){
+		this.niveau = niveau;
+	}
 	public ArrayList<Obstacle> getObstacles(){
 		return listeO;
 	}
 
 	public ArrayList<Lemming> getLemmings(){
 		return listeL;
-	}
-
-	public void setLemmings(ArrayList<Lemming> lemmings){
-		this.listeL=lemmings;
-	}
-
-	public void setObstacles(ArrayList<Obstacle> obstacles){
-		this.listeO=obstacles;
 	}
 
 	public void sortieLem(){
@@ -73,6 +67,8 @@ public class Jeu{
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
 				lem.setState(state);
+				selectedState(selectedState);
+				
 			}
 		}
 	}
@@ -89,13 +85,20 @@ public class Jeu{
 			}
 		}
 	}
-
+	
+	public void createTerre(int x, int y){
+		OTerre t = new OTerre(x,y);
+		listeO.add(t);
+		grille.add(t);
+	}
+	
 	/**
 	 * Selectionne l'état correspondant a la chaine de caractère 
 	 * dans l'attribut state
 	 * @param s
 	 */
 	public void selectedState(String s){
+		selectedState = s;
 		switch (s) {
 		case "Bloqueur":
 			state = new State_Bloqueur(this);
@@ -125,48 +128,54 @@ public class Jeu{
 			break;
 		}
 	}
+	public void quitter(){
+		quitter = true; 
+	}
 
 	/**
 	 * methode faisant avancer le jeu
 	 */
 	public void run(){
-		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
-		chargerNiveau(f);
-		int i=0;
-		int tmp=0;
-		while(isAlive()){
-			try {
-				if(i<cpt.getValeurMax() && tmp==0){
-					Lemming l1 = new Lemming(entrX, entrY, this);
-					this.listeL.add(l1);
-					grille.add(l1);
-					i++;
-					tmp = 4;
+			int i=0;
+			int tmp=0;
+			Lemming l1 = new Lemming(entrX, entrY, this);
+			this.listeL.add(l1);
+			grille.add(l1);
+			while(!listeL.isEmpty() ){ 
+				try {
+					if(i<cpt.getValeurMax() && tmp==0){
+						l1 = new Lemming(entrX, entrY, this);
+						this.listeL.add(l1);
+						grille.add(l1);
+						i++;
+						tmp = 4;
+					}
+					tmp--;
+					Thread.sleep(400);
+					for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
+					    Lemming l = iterator.next();
+					    l.step();
+					    if (!l.getAfficher()) {
+					    	grille.supprimer(l);
+					        iterator.remove();
+					    }
+					}
+					for (Iterator<Obstacle> iterator = listeO.iterator(); iterator.hasNext(); ) {
+					    Obstacle l = iterator.next();
+					    if (!l.getAfficher()) {
+					    	grille.supprimer(l);
+					        iterator.remove();
+					    }
+					}
+					grille.refresh(listeL,listeO);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				tmp--;
-				Thread.sleep(400);
-				for (Iterator<Lemming> iterator = listeL.iterator(); iterator.hasNext(); ) {
-				    Lemming l = iterator.next();
-				    l.step();
-				    l.role();
-				    if (!l.getAfficher()) {
-				    	grille.supprimer(l);
-				        iterator.remove();
-				    }
-				}
-				for (Iterator<Obstacle> iterator = listeO.iterator(); iterator.hasNext(); ) {
-				    Obstacle l = iterator.next();
-				    if (!l.getAfficher()) {
-				    	grille.supprimer(l);
-				        iterator.remove();
-				    }
-				}
-				grille.refresh(listeL,listeO);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-		}
+			grille.finJeu();
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauv�s", "Fin", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
@@ -184,7 +193,12 @@ public class Jeu{
 		return "null";
 	}
 	
-	
+	/**
+	 * permet de reccuperer l'etat du lemming aux coordonnée
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public String getLemming(int x, int y){
 		for(Lemming l: this.listeL){
 			if(l.getPosX()==x && l.getPosY()==y){
@@ -194,15 +208,11 @@ public class Jeu{
 		return "null";
 	}
 
-	public boolean isAlive(){
-		if(cpt.getValeur() != cpt.getValeurMax()){
-			return true;
-		}else{
-			return false;
-		}
-	}
-
-	public void chargerNiveau(File f){
+	/**
+	 * methode permetant de charger le niveau depuis le dossier niveau
+	 */
+	public void chargerNiveau(){
+		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
 		InputStream in = null;
 		try {
 			in = new FileInputStream(f);
@@ -235,6 +245,8 @@ public class Jeu{
 						break;
 					case 53:
 						listeO.add(new OSortie(j,i));
+						sortieX = j;
+						sortieY = i;
 						break;
 					default:
 						break;
@@ -247,5 +259,12 @@ public class Jeu{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getSortieX() {
+		return sortieX;
+	}
+	public int getSortieY() {
+		return sortieY;
 	}
 }

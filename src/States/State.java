@@ -37,7 +37,7 @@ public abstract class State {
 	public void testSortie(Lemming lem){
 		int x= lem.getPosX();
 		int y= lem.getPosY();
-		if(this.jeu.getObstacle(x,y).equals("OSortie")){
+		if(x == jeu.getSortieX() && y==jeu.getSortieY()){
 			lem.setAfficher();
 			jeu.sortieLem();
 		}
@@ -45,6 +45,11 @@ public abstract class State {
 	
 	public void testOutOfMap(Lemming lem){
 		if(lem.getPosX()==-1 || lem.getPosY()==-1 || lem.getPosX()==46 || lem.getPosY()==31){
+			lem.setAfficher();
+		}
+	}
+	public void testLave(Lemming lem){
+		if(this.jeu.getObstacle(lem.getPosX(), lem.getPosY()+1).equals("OLave")){
 			lem.setAfficher();
 		}
 	}
