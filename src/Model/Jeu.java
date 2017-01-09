@@ -13,6 +13,8 @@ import States.*;
 
 
 public class Jeu{
+	
+	
 	private int niveau;
 	private Compteur cpt;
 	private Grille grille;
@@ -39,10 +41,10 @@ public class Jeu{
 		listeO = new ArrayList<Obstacle>();	
 		quitter = false;
 	}
+	
 	public void setNiveau(int niveau){
 		this.niveau = niveau;
 	}
-
 	public ArrayList<Obstacle> getObstacles(){
 		return listeO;
 	}
@@ -51,10 +53,19 @@ public class Jeu{
 		return listeL;
 	}
 
+	/**
+	 * incremente le nombre de lemming sortis par la porte
+	 */
 	public void sortieLem(){
 		cpt.incrementer();
 	}
 
+	/**
+	 * attribue l'etat séléctionné par l'attribut state
+	 * au lemming aux coordonnées
+	 * @param x
+	 * @param y
+	 */
 	public void selectedLem(int x, int y){
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
@@ -65,6 +76,11 @@ public class Jeu{
 		}
 	}
 	
+	/**
+	 * Supprime l'obstacle aux coordonnées
+	 * @param x
+	 * @param y
+	 */
 	public void destroyObstacle(int x, int y){
 		for(Obstacle o: this.listeO){
 			if(o.getPosX()==x && o.getPosY()==y){
@@ -72,11 +88,23 @@ public class Jeu{
 			}
 		}
 	}
+	
+	/**
+	 * cree un bloc de terre aux coordonnéesx
+	 * @param x
+	 * @param y
+	 */
 	public void createTerre(int x, int y){
 		OTerre t = new OTerre(x,y);
 		listeO.add(t);
 		grille.add(t);
 	}
+	
+	/**
+	 * Selectionne l'état correspondant a la chaine de caractère 
+	 * dans l'attribut state
+	 * @param s
+	 */
 	public void selectedState(String s){
 		selectedState = s;
 		switch (s) {
@@ -108,10 +136,14 @@ public class Jeu{
 			break;
 		}
 	}
+	
 	public void quitter(){
 		quitter = true; 
 	}
 
+	/**
+	 * methode faisant avancer le jeu
+	 */
 	public void run(){
 			int i=0;
 			int tmp=0;
@@ -152,9 +184,16 @@ public class Jeu{
 			}
 			grille.finJeu();
 			JOptionPane jop = new JOptionPane();
-			jop.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauv�s", "Fin", JOptionPane.INFORMATION_MESSAGE);
+			jop.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauv�s", "Fin", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	/**
+	 * permet de reccuperer le type de l'obstacle aux coordonnée
+	 * returne "null" si la rien n'a été trouvé a ces coordonnées
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public String getObstacle(int x, int y){
 		for(Obstacle o: this.listeO){
 			if(o.getPosX()==x && o.getPosY()==y){
@@ -163,6 +202,14 @@ public class Jeu{
 		}
 		return "null";
 	}
+	
+	/**
+	 * permet de reccuperer l'etat du lemming aux coordonnée
+	 * retourne "null" si rien n'a été trouvé a ces coordonnées
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public String getLemming(int x, int y){
 		for(Lemming l: this.listeL){
 			if(l.getPosX()==x && l.getPosY()==y){
@@ -172,6 +219,9 @@ public class Jeu{
 		return "null";
 	}
 
+	/**
+	 * methode permetant de charger le niveau depuis le dossier niveau
+	 */
 	public void chargerNiveau(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier qui contient la matrice du monde
 		InputStream in = null;
@@ -221,6 +271,7 @@ public class Jeu{
 			e.printStackTrace();
 		}
 	}
+	
 	public int getSortieX() {
 		return sortieX;
 	}

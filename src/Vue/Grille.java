@@ -24,6 +24,11 @@ public class Grille extends JPanel{
 		this.setBackground(Color.BLACK);
 	}
 
+	/**
+	 * dessine tout les modèles
+	 * @param listeL
+	 * @param listeO
+	 */
 	public void refresh(ArrayList<Lemming> listeL,ArrayList<Obstacle> listeO){
 		repaint();
 		for(Lemming lem : listeL){
@@ -34,6 +39,7 @@ public class Grille extends JPanel{
 			obs.setBounds(obs.getPosX()*20,obs.getPosY()*20,20,20);
 		}
 	}
+	
 	public void supprimer(Bloc b){
 		remove(b);
 	}

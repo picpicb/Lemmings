@@ -14,6 +14,9 @@ public class Bloc extends JPanel{
 	protected String url;
 	protected boolean afficher;
 
+	/**
+	 * permet de dessiner un bloc
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -52,13 +55,24 @@ public class Bloc extends JPanel{
 		this.url = url;
 	}
 
+	/**
+	 * retourne le type du bloc
+	 * @return
+	 */
 	public String typeOf(){
 		return "Bloc";
 	}
 	
+	/**
+	 * permet de supprimer un bloc du jeu
+	 * si l'attribut afficher est faux
+	 * le bloc sera supprimé au prochain pas du jeu
+	 */
 	public void setAfficher(){
 		afficher = false;
 	}
+	
+	
 	public boolean getAfficher(){
 		return afficher;
 	}
