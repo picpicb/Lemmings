@@ -19,6 +19,9 @@ public class Compteur extends JLabel{
 		setText(valeur+"/"+valeurMax+" Lemming");
 	}
 	
+	/**
+	 * incrémente dans l'affichage le nombre de lemming sortis
+	 */
 	public void incrementer(){
 		valeur++;
 		setText(this.valeur+"/"+this.valeurMax+" Lemming");

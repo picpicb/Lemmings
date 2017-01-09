@@ -53,13 +53,16 @@ public class Jeu{
 		return listeL;
 	}
 
+	/**
+	 * incremente le nombre de lemming sortis par la porte
+	 */
 	public void sortieLem(){
 		cpt.incrementer();
 	}
 
 	/**
 	 * attribue l'etat séléctionné par l'attribut state
-	 * au lemming au coordonnées
+	 * au lemming aux coordonnées
 	 * @param x
 	 * @param y
 	 */
@@ -74,7 +77,7 @@ public class Jeu{
 	}
 	
 	/**
-	 * Supprime l'obstacle au coordonnées
+	 * Supprime l'obstacle aux coordonnées
 	 * @param x
 	 * @param y
 	 */
@@ -86,6 +89,11 @@ public class Jeu{
 		}
 	}
 	
+	/**
+	 * cree un bloc de terre aux coordonnéesx
+	 * @param x
+	 * @param y
+	 */
 	public void createTerre(int x, int y){
 		OTerre t = new OTerre(x,y);
 		listeO.add(t);
@@ -128,6 +136,7 @@ public class Jeu{
 			break;
 		}
 	}
+	
 	public void quitter(){
 		quitter = true; 
 	}
@@ -180,6 +189,7 @@ public class Jeu{
 
 	/**
 	 * permet de reccuperer le type de l'obstacle aux coordonnée
+	 * returne "null" si la rien n'a été trouvé a ces coordonnées
 	 * @param x
 	 * @param y
 	 * @return
@@ -195,6 +205,7 @@ public class Jeu{
 	
 	/**
 	 * permet de reccuperer l'etat du lemming aux coordonnée
+	 * retourne "null" si rien n'a été trouvé a ces coordonnées
 	 * @param x
 	 * @param y
 	 * @return
