@@ -76,8 +76,8 @@ public class Jeu{
 	public void run(){
 		int i=0;
 		int tmp=0;
-		createLemming(entrX,entrY);
-		while(!listeL.isEmpty() ){ 
+		boolean isAlive = true;
+		while(isAlive){
 			try {
 				if(i<cpt.getValeurMax() && tmp==0){
 					//creation des lemmings
@@ -85,6 +85,8 @@ public class Jeu{
 					i++;
 					tmp = 4;
 				}
+				if(listeL.isEmpty())
+					isAlive = false;
 				tmp--;
 				Thread.sleep(500);
 				//Utilisation de l'iterator pour supprimer des element<Lemming> de la liste
