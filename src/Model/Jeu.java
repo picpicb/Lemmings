@@ -110,8 +110,7 @@ public class Jeu{
 			}
 		}
 		grille.finJeu(); // vide l'afficheur
-		JOptionPane jop = new JOptionPane();
-		jop.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauves", "Fin", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Score : "+cpt.getValeur()+"/"+cpt.getValeurMax()+" lemmings sauves", "Fin", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	//incremente le nombre de lemming sortis par la porte

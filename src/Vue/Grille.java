@@ -1,20 +1,8 @@
 package Vue;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-
 import Model.*;
-
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-
-import javax.imageio.ImageIO;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Grille extends JPanel{
