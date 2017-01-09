@@ -19,6 +19,8 @@ import States.*;
 
 
 public class Jeu{
+	
+	
 	private int niveau;
 	private Compteur cpt;
 	private Grille grille;
@@ -40,7 +42,7 @@ public class Jeu{
 		listeO = new ArrayList<Obstacle>();	
 	}
 
-
+	
 	public ArrayList<Obstacle> getObstacles(){
 		return listeO;
 	}
@@ -61,6 +63,12 @@ public class Jeu{
 		cpt.incrementer();
 	}
 
+	/**
+	 * attribue l'etat séléctionné par l'attribut state
+	 * au lemming au coordonnées
+	 * @param x
+	 * @param y
+	 */
 	public void selectedLem(int x, int y){
 		for(Lemming lem: this.listeL){
 			if(lem.getPosX()==x && lem.getPosY()==y){
@@ -69,6 +77,11 @@ public class Jeu{
 		}
 	}
 	
+	/**
+	 * Supprime l'obstacle au coordonnées
+	 * @param x
+	 * @param y
+	 */
 	public void destroyObstacle(int x, int y){
 		for(Obstacle o: this.listeO){
 			if(o.getPosX()==x && o.getPosY()==y){
@@ -77,6 +90,11 @@ public class Jeu{
 		}
 	}
 
+	/**
+	 * Selectionne l'état correspondant a la chaine de caractère 
+	 * dans l'attribut state
+	 * @param s
+	 */
 	public void selectedState(String s){
 		switch (s) {
 		case "Bloqueur":
@@ -108,6 +126,9 @@ public class Jeu{
 		}
 	}
 
+	/**
+	 * methode faisant avancer le jeu
+	 */
 	public void run(){
 		File f = new File("niveaux/niv"+this.niveau);//fichier bin qui contient la matrice du monde
 		chargerNiveau(f);
@@ -148,6 +169,12 @@ public class Jeu{
 		}
 	}
 
+	/**
+	 * permet de reccuperer le type de l'obstacle aux coordonnée
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public String getObstacle(int x, int y){
 		for(Obstacle o: this.listeO){
 			if(o.getPosX()==x && o.getPosY()==y){
@@ -156,6 +183,8 @@ public class Jeu{
 		}
 		return "null";
 	}
+	
+	
 	public String getLemming(int x, int y){
 		for(Lemming l: this.listeL){
 			if(l.getPosX()==x && l.getPosY()==y){
