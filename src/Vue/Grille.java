@@ -34,6 +34,6 @@ public class Grille extends JPanel{
 	
 	public void finJeu(){
 		removeAll();
-		repaint();
+		//repaint();
 	}
 }
